@@ -32,10 +32,14 @@
 	"type": "module",
 	"dependencies": {
 		"@ffmpeg-installer/ffmpeg": "^1.1.0",
+		"@svelteuidev/composables": "^0.15.3",
+		"@svelteuidev/core": "^0.15.3",
+		"@svelteuidev/motion": "^0.15.3",
 		"@types/fluent-ffmpeg": "^2.1.22",
 		"dotenv": "^16.3.1",
 		"fluent-ffmpeg": "^2.1.2",
 		"mongodb": "^6.1.0",
+		"radix-icons-svelte": "^1.2.1",
 		"soundcloud.ts": "^0.5.2"
 	}
 }
