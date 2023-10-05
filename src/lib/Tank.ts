@@ -1,4 +1,4 @@
-import type {Track} from "$lib/Model";
+import type {Track} from "$lib/data";
 
 export async function Collect(trackEntity: Track) {
     await fetch("/library/sync/collect?" + new URLSearchParams({

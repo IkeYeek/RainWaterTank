@@ -1,12 +1,12 @@
 <script lang="ts">
-    import type {Track} from "$lib/Model";
+    import type {TrackRaw} from "$lib/Model";
     import {Button, Space, Stack, Text, Divider} from "@svelteuidev/core";
     import {Download } from "radix-icons-svelte";
     import {Collect, Evaporate} from "$lib/Tank";
 
-    export let collection: Array<Track>;
+    export let collection: Array<TrackRaw>;
     let syncingTracks = [];
-    const switchSyncStatus = async (track: Track) => {
+    const switchSyncStatus = async (track: TrackRaw) => {
         syncingTracks = [...syncingTracks, track]
         if (track.synced) {
             await Evaporate(track);
