@@ -39,7 +39,7 @@ const SoundcloudWrapper = () => {
     }
 
     const retrieveRawLibrary = async (allCrates: Array<SoundRawLibraryEntry> = [], nextOffset: string | undefined = undefined): Promise<Array<SoundRawLibraryEntry>>  => {
-        const retrievedCrates = await retrieveEndpointChunk("/me/library/all", nextOffset, 5);
+        const retrievedCrates = await retrieveEndpointChunk("/me/library/all", nextOffset, 50);
         if (retrievedCrates.collection.length > 0) {
             retrievedCrates.collection.forEach(v => allCrates.push(v as SoundRawLibraryEntry));
 

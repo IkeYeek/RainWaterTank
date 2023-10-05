@@ -210,8 +210,22 @@ const getLastSyncedLibrary = async () => {
     }
 }
 
+const switchSyncStatus = async (track: Track) => {
+    const newStatus = !track.synced;
+    const db = await connectToDatabase();
+    const collection = db.collection("tracks");
+    const res = await collection.updateOne({
+        permalink_url: track.permalink_url
+    }, {
+        $set: {
+            synced: newStatus,
+        }
+    });
+}
+
 export {
     syncLibrary,
     getLastSyncedLibraryData,
-    getLastSyncedLibrary
+    getLastSyncedLibrary,
+    switchSyncStatus,
 }

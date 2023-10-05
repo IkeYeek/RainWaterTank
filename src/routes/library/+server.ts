@@ -9,6 +9,7 @@ export async function GET() {
     } else {
         return new Response(JSON.stringify({
             synced: true,
+            ...syncData,
             ...await getLastSyncedLibrary()
         }), {
             headers: { 'Content-Type': 'application/json' }

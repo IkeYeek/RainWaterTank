@@ -54,7 +54,7 @@
                     </Center>
                     <Stack>
                         <Title order={4} color="blue">Library</Title>
-                        <Text size="sm" color="gray">Your whole songs collection</Text>
+                        <Text size="sm" color="gray">Your whole songs collection - {libraryData.stats.total} tracks</Text>
                     </Stack>
                 </Flex>
             </div>
@@ -67,7 +67,7 @@
                             </Center>
                             <Stack>
                                 <Title order={4} color="blue">Liked Albums</Title>
-                                <Text size="sm" color="gray">The albums you liked</Text>
+                                <Text size="sm" color="gray">The albums you liked - {libraryData.likedAlbums.reduce((acc, curr) => acc + curr.tracks.length, 0)} tracks</Text>
                             </Stack>
                         </Flex>
                     </div>
@@ -81,7 +81,7 @@
                             </Center>
                             <Stack>
                                 <Title order={4} color="blue">Liked Playlists</Title>
-                                <Text size="sm" color="gray">The playlists you liked</Text>
+                                <Text size="sm" color="gray">The playlists you liked - {libraryData.likedPlaylists.reduce((acc, curr) => acc + curr.tracks.length, 0)} tracks</Text>
                             </Stack>
                         </Flex>
                     </div>
@@ -95,7 +95,7 @@
                             </Center>
                             <Stack>
                                 <Title order={4} color="blue">Liked Tracks</Title>
-                                <Text size="sm" color="gray">The tracks you liked</Text>
+                                <Text size="sm" color="gray">The tracks you liked - { libraryData.likedTracks.length } tracks</Text>
                             </Stack>
                         </Flex>
                     </div>
@@ -109,7 +109,7 @@
                             </Center>
                             <Stack>
                                 <Title order={4} color="blue">Playlists</Title>
-                                <Text size="sm" color="gray">Your playlists</Text>
+                                <Text size="sm" color="gray">Your playlists - {libraryData.playlists.reduce((acc, curr) => acc + curr.tracks.length, 0)} tracks</Text>
                             </Stack>
                         </Flex>
                     </div>
@@ -123,11 +123,11 @@
                             </Center>
                             <Stack>
                                 <Title order={4} color="blue">Tracks</Title>
-                                <Text size="sm" color="gray">Your Tracks</Text>
+                                <Text size="sm" color="gray">Your Tracks - { libraryData.userTracks.length } tracks</Text>
                             </Stack>
                         </Flex>
                     </div>
-                    <LibraryTracks collection={libraryData.userTracks} />
+                    <LibraryTracks collection={libraryData.userTracks}/>
                 </Accordion.Item>
             </Accordion>
         </Accordion.Item>

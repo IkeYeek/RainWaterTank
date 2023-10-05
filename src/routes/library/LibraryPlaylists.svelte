@@ -11,7 +11,7 @@
         <Accordion.Item value={`playlist-${item.permalink_url}`}>
             <div slot="control">
                 <Title order={4}>
-                    { item.title }
+                    { item.title } - { item.tracks.length } tracks
                 </Title>
             </div>
             <LibraryTracks collection={item.tracks}/>
