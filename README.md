@@ -1,38 +1,28 @@
-# create-svelte
+# RainWaterTank
+easily manage locally your soundcloud library !
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+With RainWaterTank, collect your tracks directly from the clouds so you can easily take your favorites songs out for djing.
 
-## Creating a project
+I built this because I use SeratoDJ soundcloud integration everydays, but I felt it overkill to always download your song on the go in order to mix it. Now, I can search for tracks online, put them in playlists and then download them. 
 
-If you're seeing this, you've probably already done this step. Congrats!
+## How to use
+1) Install Docker
+2) Download the repo either by cloning / forking+cloning it or by directly downloading sources (not recommanded)
+3) Make a .env from the .env.example. You will need __Soundcloud Go+__ in order to download songs.
+4) Run `docker compose up`. That will pull the required images for the app + the database, and then serve the app on local port 5173 by default
+5) Sync your library and have fun. Syncing takes time so be patient !
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+## Credits
+[soundcloud.ts](https://github.com/Tenpi/soundcloud.ts)
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+[SvelteKit](https://kit.svelte.dev/)
 
-## Developing
+[SvelteUI](https://svelteui.org)
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+[Radix UI icons](https://www.radix-ui.com/icons)
 
-```bash
-npm run dev
+[Docker](https://www.docker.com/)
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+[MongoDB](https://www.mongodb.com/)
 
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+[Mongoose](https://mongoosejs.com/)
