@@ -1,16 +1,11 @@
 import type { SoundcloudTrackV2 } from 'soundcloud.ts';
 import type { Track } from '$lib/data';
+import { TracksModel } from '$lib/data';
 
-const SCToRWTTrack = (track: SoundcloudTrackV2): Track => {
-	return {
-		title: track.title,
-		artist: track.user.username,
-		genre: track.genre,
-		tags: track.tag_list,
-		permalink_url: track.permalink_url,
-		description: track.description || '',
-		synced: false
-	};
+const SCToRWTTrack = async (track: SoundcloudTrackV2): Promise<Track | null> => {
+	return await TracksModel.findOne({
+		permalink_url: track.permalink_url
+	}).exec();
 };
 
 export { SCToRWTTrack };

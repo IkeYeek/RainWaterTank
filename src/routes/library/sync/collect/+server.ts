@@ -4,11 +4,17 @@ import ffmpeg from 'fluent-ffmpeg';
 import * as fs from 'fs';
 import { switchSyncStatus } from '$lib/Model';
 import { SCToRWTTrack } from '$lib/Utils';
+import { error } from '@sveltejs/kit';
 
 export const GET: RequestHandler = async ({ url }) => {
 	const downloadDirectory = 'tracks';
 
 	const track = await SoundcloudWrapper().raw.tracks.getV2(url.searchParams.get('track') as string);
+	const localTrack = await SCToRWTTrack(track);
+	if (localTrack === null)
+		throw error(404, {
+			message: "Couldn't find requested track in db, please do resync"
+		});
 	const downloadedTrackPath = await SoundcloudWrapper().raw.util.downloadTrack(
 		track,
 		downloadDirectory
@@ -28,7 +34,7 @@ export const GET: RequestHandler = async ({ url }) => {
 			})
 			.on('end', async () => {
 				fs.unlinkSync(downloadedTrackPath);
-				await switchSyncStatus(SCToRWTTrack(track));
+				await switchSyncStatus(localTrack);
 			})
 			.on('error', () => {
 				return new Response('error during conversion');
@@ -36,7 +42,7 @@ export const GET: RequestHandler = async ({ url }) => {
 			.run();
 		return new Response('Converting');
 	} else {
-		await switchSyncStatus(SCToRWTTrack(track));
+		await switchSyncStatus(localTrack);
 		return new Response('done without conversion');
 	}
 };
