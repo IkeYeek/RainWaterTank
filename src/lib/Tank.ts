@@ -8,8 +8,8 @@ export async function Collect(trackEntity: Track) {
 }
 
 export async function Evaporate(trackEntity: Track) {
-    const res = await fetch("/library/sync/evaporate?" + new URLSearchParams({
+    await fetch("/library/sync/evaporate?" + new URLSearchParams({
         track: trackEntity.permalink_url,
     }));
-    trackEntity.synced = !res.ok;
+    trackEntity.synced = false;
 }

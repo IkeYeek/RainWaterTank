@@ -5,7 +5,7 @@ import {
     LikedPlaylistsModel,
     LikedTracksModel,
     SyncDataModel,
-    TrackModel,
+    TracksModel,
     UserPlaylistsModel,
     UserTracksModel
 } from "$lib/data";
@@ -25,7 +25,7 @@ const syncLibrary = async (library: Array<SoundcloudPlaylistV2>, userTracks: Arr
     const knownTracksPermas = new Map<string,  mongoose.Document<unknown, object, Track> & Track & {_id: mongoose.Types.ObjectId}>();
     const ensureInserted = async (track: SoundcloudTrackV2) => {
         if (!knownTracksPermas.has(track.permalink_url)) {
-            const castedTrack = new TrackModel({
+            const castedTrack = new TracksModel({
                 title: track.title,
                 artist: track.user.username,
                 description: track.description || "",

@@ -45,7 +45,7 @@ const SyncDataSchema = new Schema({
     date: Date,
 });
 
-const TrackModel = mongoose.model('tracks', TrackSchema, 'tracks');
+const TracksModel = mongoose.model('tracks', TrackSchema, 'tracks');
 const UserTracksModel = mongoose.model('userTracks', TrackRepositorySchema, 'userTracks')
 const SyncDataModel = mongoose.model('syncdata', SyncDataSchema, 'syncdata');
 const UserPlaylistsModel = mongoose.model('userPlaylists', PlaylistSchema, 'userPlaylists');
@@ -63,7 +63,7 @@ export {
     TrackRepositorySchema,
     PlaylistSchema,
 
-    TrackModel,
+    TracksModel,
     UserTracksModel,
     SyncDataModel,
     UserPlaylistsModel,
