@@ -3,12 +3,13 @@ import SoundcloudWrapper from "$lib/SoundcloudWrapper";
 import ffmpeg from 'fluent-ffmpeg';
 import * as fs from 'fs';
 import {switchSyncStatus} from "$lib/Model";
+import {SCToRWTTrack} from "$lib/Utils";
 
 
 export const GET: RequestHandler = async ({url}) => {
     const downloadDirectory = "tracks";
 
-    const track = await SoundcloudWrapper().raw.tracks.getV2(url.searchParams.get("track"));
+    const track = await SoundcloudWrapper().raw.tracks.getV2(url.searchParams.get("track") as string);
     const downloadedTrackPath = await SoundcloudWrapper().raw.util.downloadTrack(track, downloadDirectory);
     const downloadedTrackExtension = downloadedTrackPath.split('.').pop()!;
 
@@ -22,15 +23,15 @@ export const GET: RequestHandler = async ({url}) => {
         })
             .on('end', async () => {
                 fs.unlinkSync(downloadedTrackPath);
-                await switchSyncStatus(track);
-                return new Response("done with conversion");
+                await switchSyncStatus(SCToRWTTrack(track));
             })
             .on('error', () => {
                 return new Response("error during conversion");
             })
             .run();
+        return new Response("Converting");
     } else {
-        await switchSyncStatus(track);
+        await switchSyncStatus(SCToRWTTrack(track));
         return new Response("done without conversion");
     }
 }

@@ -13,7 +13,7 @@
         Text, Skeleton, Space
     } from "@svelteuidev/core";
     import {Heart, InfoCircled, Layers, Play, Reload} from "radix-icons-svelte";
-    import {getContext, onMount} from "svelte";
+    import {getContext} from "svelte";
     import LibraryTracks from "./LibraryTracks.svelte";
     import LibraryPlaylists from "./LibraryPlaylists.svelte";
 

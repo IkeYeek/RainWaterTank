@@ -1,7 +1,7 @@
 <script lang="ts">
     import type {TrackRaw} from "$lib/Model";
-    import {Button, Space, Stack, Text, Divider} from "@svelteuidev/core";
-    import {Download } from "radix-icons-svelte";
+    import {Button, Space, Stack, Text, Divider, Loader, Center} from "@svelteuidev/core";
+    import {Download, Trash} from "radix-icons-svelte";
     import {Collect, Evaporate} from "$lib/Tank";
 
     export let collection: Array<TrackRaw>;
@@ -29,9 +29,19 @@
             <Space w="xs" />
             <Text size="xs">{track.artist}</Text>
             <div style="margin-left: auto">
-                <Button radius="xl" on:click={async () => await switchSyncStatus(track)} variant="filled" size="lg" color={syncingTracks.includes(track) ? 'grape' : track.synced ? 'green' : 'yellow' }>
-                    <Download />
-                </Button>
+                {#if syncingTracks.includes(track)}
+                    <Button radius="xl" disabled variant="filled" size="lg" color="transparent">
+                        <Loader variant="bars"/>
+                    </Button>
+                {:else if track.synced}
+                    <Button radius="xl" on:click={async () => await switchSyncStatus(track)} variant="filled" size="lg" color="green">
+                        <Trash />
+                    </Button>
+                {:else}
+                    <Button radius="xl" on:click={async () => await switchSyncStatus(track)} variant="filled" size="lg" color="yellow">
+                        <Download />
+                    </Button>
+                {/if}
             </div>
         </div>
         <Divider />

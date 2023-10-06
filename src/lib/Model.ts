@@ -34,7 +34,6 @@ const syncLibrary = async (library: Array<SoundcloudPlaylistV2>, userTracks: Arr
                 permalink_url: track.permalink_url,
                 synced: false,
             });
-            console.log(castedTrack)
 
             await castedTrack.save();
             knownTracksPermas.set(castedTrack.permalink_url, castedTrack);
@@ -46,7 +45,7 @@ const syncLibrary = async (library: Array<SoundcloudPlaylistV2>, userTracks: Arr
         "likedTracks",
         "likedPlaylists",
         "likedAlbums",
-        "playlists",
+        "userPlaylists",
         "userTracks",
         "tracks",
         "syncdata"
@@ -112,6 +111,7 @@ const getLastSyncedLibraryData = async () => {
 const getLastSyncedLibrary = async () => {
     const db = await connectToDatabase();
 
+
     const likedTracks = await db.connection.db!.collection("likedTracks").find().toArray();
     const likedAlbums = await db.connection.db!.collection("likedAlbums").find().toArray();
     const likedPlaylists = await db.connection.db!.collection("likedPlaylists").find().toArray();
@@ -161,6 +161,11 @@ const getLastSyncedLibrary = async () => {
                 description: playlists.description,
                 permalink_url: playlists.permalink_url,
                 tracks: playlists.tracks.map((trackId: mongoose.Types.ObjectId) => tracks.find(track => track._id.equals(trackId))!)
+            }
+            for (const t of playlists.tracks) {
+                const found = tracks.find(track => track._id.equals(t));
+                if (found === undefined)
+                    console.log(t)
             }
             return ret;
         }),

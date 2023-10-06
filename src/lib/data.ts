@@ -47,7 +47,7 @@ const SyncDataSchema = new Schema({
 
 const TrackModel = mongoose.model('tracks', TrackSchema, 'tracks');
 const UserTracksModel = mongoose.model('userTracks', TrackRepositorySchema, 'userTracks')
-const SyncDataModel = mongoose.model('syncdata', SyncDataSchema, 'syncdata', 'syncdata');
+const SyncDataModel = mongoose.model('syncdata', SyncDataSchema, 'syncdata');
 const UserPlaylistsModel = mongoose.model('userPlaylists', PlaylistSchema, 'userPlaylists');
 const LikedTracksModel = mongoose.model('likedTracks', TrackRepositorySchema, 'likedTracks');
 const LikedPlaylistsModel = mongoose.model('likedPlaylists', PlaylistSchema, 'likedPlaylists');
